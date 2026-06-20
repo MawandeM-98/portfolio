@@ -47,9 +47,12 @@ function loadProjects() {
     const container = document.getElementById('projectsContainer');
     if (!container) return;
     
+    // Clear loading state if any
+    container.innerHTML = '';
+    
     projectsData.forEach(project => {
         const projectCard = document.createElement('div');
-        projectCard.className = 'project-card';
+        projectCard.className = 'glass-card project-card';
         
         const demoLink = project.demo ? 
             `<a href="${project.demo}" class="project-link" target="_blank">🔗 Live Demo</a>` : '';

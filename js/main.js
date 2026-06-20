@@ -1,28 +1,82 @@
-// Mobile menu toggle
+// Theme Management
+const THEMES = {
+    REGULAR: 'regular',
+    LIGHT: 'light',
+    DARK: 'dark'
+};
+
+function getCurrentTheme() {
+    return document.body.getAttribute('data-theme') || THEMES.REGULAR;
+}
+
+function setTheme(theme) {
+    document.body.setAttribute('data-theme', theme);
+    localStorage.setItem('portfolio-theme', theme);
+    
+    // Update toggle button icon
+    const toggle = document.querySelector('#themeToggle .theme-icon');
+    if (toggle) {
+        const icons = {
+            [THEMES.REGULAR]: '🌙',
+            [THEMES.LIGHT]: '☀️',
+            [THEMES.DARK]: '🌙'
+        };
+        toggle.textContent = icons[theme] || '🌙';
+    }
+}
+
+function cycleTheme() {
+    const current = getCurrentTheme();
+    const cycle = {
+        [THEMES.REGULAR]: THEMES.LIGHT,
+        [THEMES.LIGHT]: THEMES.DARK,
+        [THEMES.DARK]: THEMES.REGULAR
+    };
+    setTheme(cycle[current] || THEMES.REGULAR);
+}
+
+// Initialize theme from localStorage
 document.addEventListener('DOMContentLoaded', () => {
+    // Load saved theme
+    const savedTheme = localStorage.getItem('portfolio-theme');
+    if (savedTheme && Object.values(THEMES).includes(savedTheme)) {
+        setTheme(savedTheme);
+    } else {
+        setTheme(THEMES.REGULAR);
+    }
+    
+    // Mobile menu toggle - RESTORED
     const mobileMenu = document.querySelector('.mobile-menu');
     const navLinks = document.querySelector('.nav-links');
     
-    if (mobileMenu) {
-        mobileMenu.addEventListener('click', () => {
-            if (navLinks.style.display === 'flex') {
-                navLinks.style.display = 'none';
-            } else {
-                navLinks.style.display = 'flex';
-                navLinks.style.flexDirection = 'column';
-                navLinks.style.position = 'absolute';
-                navLinks.style.top = '70px';
-                navLinks.style.left = '0';
-                navLinks.style.right = '0';
-                navLinks.style.background = 'rgba(0,0,0,0.95)';
-                navLinks.style.backdropFilter = 'blur(12px)';
-                navLinks.style.padding = '1rem';
-                navLinks.style.gap = '1rem';
+    if (mobileMenu && navLinks) {
+        mobileMenu.addEventListener('click', (e) => {
+            e.stopPropagation();
+            navLinks.classList.toggle('open');
+        });
+        
+        // Close menu when clicking outside
+        document.addEventListener('click', (e) => {
+            if (!e.target.closest('.nav-container')) {
+                navLinks.classList.remove('open');
             }
+        });
+        
+        // Close menu when clicking a link
+        navLinks.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => {
+                navLinks.classList.remove('open');
+            });
         });
     }
     
-    // Contact form handler
+    // Theme toggle
+    const themeToggle = document.getElementById('themeToggle');
+    if (themeToggle) {
+        themeToggle.addEventListener('click', cycleTheme);
+    }
+    
+    // Contact form handler - RESTORED
     const contactForm = document.getElementById('contactForm');
     if (contactForm) {
         contactForm.addEventListener('submit', (e) => {
@@ -32,7 +86,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
     
-    // Smooth scroll for anchor links
+    // Smooth scroll for anchor links - RESTORED
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         anchor.addEventListener('click', function(e) {
             e.preventDefault();
@@ -43,34 +97,44 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
     
-    // Add glassmorphism effect on scroll
+    // Glassmorphism effect on scroll - RESTORED
+    let ticking = false;
     window.addEventListener('scroll', () => {
-        const nav = document.querySelector('.glass-nav');
-        if (window.scrollY > 50) {
-            nav.style.background = 'rgba(0, 0, 0, 0.8)';
-            nav.style.backdropFilter = 'blur(20px)';
-        } else {
-            nav.style.background = 'rgba(255, 255, 255, 0.08)';
-            nav.style.backdropFilter = 'blur(12px)';
+        if (!ticking) {
+            requestAnimationFrame(() => {
+                const nav = document.querySelector('.glass-nav');
+                if (window.scrollY > 50) {
+                    nav.style.background = 'rgba(0, 0, 0, 0.8)';
+                    nav.style.backdropFilter = 'blur(20px)';
+                } else {
+                    nav.style.background = '';
+                    nav.style.backdropFilter = '';
+                }
+                ticking = false;
+            });
+            ticking = true;
         }
     });
     
-    // Animate stats on view
+    // Animate stats on view - RESTORED
     const observerOptions = {
-        threshold: 0.5,
+        threshold: 0.2,
         rootMargin: '0px'
     };
     
     const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
+        entries.forEach((entry, index) => {
             if (entry.isIntersecting) {
-                entry.target.style.opacity = '1';
-                entry.target.style.transform = 'translateY(0)';
+                setTimeout(() => {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }, index * 100);
+                observer.unobserve(entry.target);
             }
         });
     }, observerOptions);
     
-    document.querySelectorAll('.stat-card, .project-card').forEach(el => {
+    document.querySelectorAll('.stat-card, .project-card, .experience-item, .skill-category').forEach(el => {
         el.style.opacity = '0';
         el.style.transform = 'translateY(20px)';
         el.style.transition = 'all 0.6s ease';
@@ -78,12 +142,16 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 });
 
-// Add floating animation to glass cards
-const cards = document.querySelectorAll('.glass-card');
-cards.forEach((card, index) => {
-    card.style.animation = `floatCard ${2 + index * 0.2}s ease-in-out infinite`;
+// Floating animation - RESTORED
+document.addEventListener('DOMContentLoaded', () => {
+    const cards = document.querySelectorAll('.glass-card');
+    cards.forEach((card, index) => {
+        card.style.animation = `floatCard ${2 + index * 0.2}s ease-in-out infinite`;
+        card.style.animationDelay = `${index * 0.1}s`;
+    });
 });
 
+// Inject keyframe animation
 const style = document.createElement('style');
 style.textContent = `
     @keyframes floatCard {
