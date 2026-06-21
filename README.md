@@ -21,4 +21,16 @@ Frontend: HTML5 · CSS3 · Vanilla JS
 Styling: Glassmorphism · CSS Grid · Flexbox
 Hosting: GitHub Pages
 
+## 🚀 How to Open / Run Locally
+
+### Option 1: Direct Open (Easiest)
+1. Download or clone this repository
+2. Navigate to the project folder
+3. **Double-click `index.html`** 
+4. The portfolio will open in your default browser
+
+### Option 2: Using Live Server (Recommended for Development)
+```bash
+# Install Live Server extension in VS Code
+# Right-click index.html → Open with Live Server
 
