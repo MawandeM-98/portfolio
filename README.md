@@ -1,40 +1,24 @@
-# Maawande Msomi Portfolio - Glassmorphism Theme
+# 🌟 Mawande Msomi | Full Stack Developer Portfolio
 
-## How to Deploy & Host Your Projects
+[![Live Demo](https://img.shields.io/badge/Live-Demo-87CEEB?style=for-the-badge&logo=githubpages)](https://mawandem-98.github.io/portfolio/)
+[![Made with](https://img.shields.io/badge/Made%20with-HTML%2FCSS%2FJS-ff69b4?style=for-the-badge)](https://github.com/MawandeM-98/portfolio)
+[![Responsive](https://img.shields.io/badge/Responsive-Yes-00ff00?style=for-the-badge)]()
 
-### Option 1: Local Testing
-1. Save all files in the structure shown above
-2. Open `index.html` in your browser
-3. Navigate through the multi-page portfolio
+> Modern glassmorphism portfolio showcasing my work as a Full Stack & Mobile Developer
 
-### Option 2: Deploy for Free (Recommended)
+## ✨ Features
 
-#### Netlify (Easiest)
-1. Go to [netlify.com](https://netlify.com)
-2. Drag and drop your entire portfolio folder
-3. Your site is live at `your-name.netlify.app`
+- 🪟 **Glassmorphism UI** - Frosted glass effect with silver/light blue theme
+- 🎨 **3 Theme Modes** - Light, Regular (default), Dark
+- 📱 **Fully Responsive** - Works on all devices
+- 📄 **CV Downloads** - PDF & Word formats
+- 🖼️ **Animated Profile Photo** - Pulsing ring animation
+- 🚀 **Pure Vanilla** - No frameworks, just HTML/CSS/JS
 
-#### Vercel
-1. Go to [vercel.com](https://vercel.com)
-2. Import your project folder
-3. Deploy in one click
+## 🛠️ Tech Stack
 
-#### GitHub Pages
-1. Create repo `yourusername.github.io`
-2. Push all files
-3. Enable GitHub Pages in repo settings
+Frontend: HTML5 · CSS3 · Vanilla JS
+Styling: Glassmorphism · CSS Grid · Flexbox
+Hosting: GitHub Pages
 
-## About Your Projects Being "Hosted"
 
-**Current setup:** Project cards link to your GitHub repos (Option A)
-
-**If you want to actually embed projects** (Option B):
-- Each project needs to be deployed separately (Netlify/Vercel)
-- Then update `projects.js` with the live demo URLs
-
-Example after deploying a project:
-```javascript
-{
-    title: "DigitBreaker",
-    demo: "https://digitbreaker.netlify.app"  // Add this
-}
