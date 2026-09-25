@@ -1,4 +1,5 @@
 const projectsData = [
+    // ===== ORIGINAL PROJECTS =====
     {
         title: "DigitBreaker",
         description: "A JavaScript-based game where users attempt to break a randomized 4-digit PIN with very limited attempts available.",
@@ -40,40 +41,69 @@ const projectsData = [
         tech: ["Java", "JavaScript", "HTML5", "CSS3"],
         github: "https://github.com/The-DigitalAcademy/GroupEMultipleQuestion",
         demo: null
+    },
+    
+    // ===== NEW PROJECTS ADDED =====
+    {
+        title: "Who Wants to Be a Millionaire",
+        description: "A fully functional, interactive quiz game inspired by the iconic TV show. Built with pure HTML, CSS, and JavaScript — no frameworks, no dependencies.",
+        tech: ["JavaScript", "HTML5", "CSS3", "Canvas Confetti"],
+        github: "https://github.com/MawandeM-98/who-wants-to-be-a-millionaire-mock-game",
+        demo: null
+    },
+    {
+        title: "CourseGuide",
+        description: "A comprehensive exam practice platform for South African Matriculants with up to 200 multiple-choice questions per subject, instant feedback, and explanations aligned with the CAPS syllabus.",
+        tech: ["JavaScript", "HTML5", "CSS3", "Glassmorphism"],
+        github: "https://github.com/MawandeM-98/CourseGuide",
+        demo: null
+    },
+    {
+        title: "Bushlore Fleet Rental Dashboard",
+        description: "A fleet rental management dashboard built with React, TypeScript, and Vite. Features modern UI components with Tailwind CSS and mock data via JSON Server.",
+        tech: ["React", "TypeScript", "Vite", "Tailwind CSS", "JSON Server"],
+        github: "https://github.com/MawandeM-98/bushlorefleet-rental-dashboard",
+        demo: null
     }
 ];
 
+// Helper function to create project cards
+function createProjectCard(project) {
+    const card = document.createElement('div');
+    card.className = 'glass-card project-card';
+    
+    const demoLink = project.demo 
+        ? `<a href="${project.demo}" class="project-link" target="_blank">🔗 Live Demo</a>` 
+        : '';
+    
+    card.innerHTML = `
+        <h3 class="project-title">${project.title}</h3>
+        <p class="project-description">${project.description}</p>
+        <div class="project-tech">
+            ${project.tech.map(tech => `<span class="tech-tag">${tech}</span>`).join('')}
+        </div>
+        <div class="project-links">
+            <a href="${project.github}" class="project-link" target="_blank">📦 GitHub Repo</a>
+            ${demoLink}
+        </div>
+    `;
+    
+    return card;
+}
+
+// Load projects when DOM is ready
 function loadProjects() {
     const container = document.getElementById('projectsContainer');
     if (!container) return;
     
-    // Clear loading state if any
     container.innerHTML = '';
     
     projectsData.forEach(project => {
-        const projectCard = document.createElement('div');
-        projectCard.className = 'glass-card project-card';
-        
-        const demoLink = project.demo ? 
-            `<a href="${project.demo}" class="project-link" target="_blank">🔗 Live Demo</a>` : '';
-        
-        projectCard.innerHTML = `
-            <h3 class="project-title">${project.title}</h3>
-            <p class="project-description">${project.description}</p>
-            <div class="project-tech">
-                ${project.tech.map(tech => `<span class="tech-tag">${tech}</span>`).join('')}
-            </div>
-            <div class="project-links">
-                <a href="${project.github}" class="project-link" target="_blank">📦 GitHub Repo</a>
-                ${demoLink}
-            </div>
-        `;
-        
-        container.appendChild(projectCard);
+        const card = createProjectCard(project);
+        container.appendChild(card);
     });
 }
 
-// Load projects when DOM is ready
 if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', loadProjects);
 } else {
