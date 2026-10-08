@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Projects | Maawande Msomi</title>
+    <title>Gallery | Maawande Msomi</title>
     <link rel="stylesheet" href="css/style.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 </head>
@@ -19,8 +19,8 @@
             </div>
             <ul class="nav-links">
                 <li><a href="index.html">Home</a></li>
-                <li><a href="projects.html" class="active">Projects</a></li>
-                <li><a href="gallery.html">Gallery</a></li>
+                <li><a href="projects.html">Projects</a></li>
+                <li><a href="gallery.html" class="active">Gallery</a></li>
                 <li><a href="cv.html">CV</a></li>
                 <li><a href="contact.html">Contact</a></li>
             </ul>
@@ -35,16 +35,23 @@
 
     <main class="container">
         <div class="glass-card page-header">
-            <h1 class="page-title">My Projects</h1>
-            <p class="page-subtitle">Enterprise-grade applications, games, and full-stack solutions</p>
+            <h1 class="page-title">Project Gallery</h1>
+            <p class="page-subtitle">Visual showcase of apps I've built — click any image to view full size</p>
         </div>
 
-        <div class="projects-grid" id="projectsContainer">
-            <!-- Projects will be dynamically loaded here -->
+        <div class="gallery-grid" id="galleryContainer">
+            <!-- Gallery items loaded dynamically -->
         </div>
     </main>
 
-    <script src="js/projects.js"></script>
+    <!-- Lightbox for full-size preview -->
+    <div class="lightbox" id="lightbox">
+        <span class="lightbox-close" id="lightboxClose">&times;</span>
+        <img src="" alt="" class="lightbox-img" id="lightboxImg">
+        <div class="lightbox-caption" id="lightboxCaption"></div>
+    </div>
+
+    <script src="js/gallery.js"></script>
     <script src="js/main.js"></script>
 </body>
 </html>
